@@ -260,8 +260,7 @@ gcd[m,n]≡0⇒m≡0 {suc m} {n} gmn =
   ⊥.elim {A = λ bot → suc m ≡ 0} (gcd[m,n]≢0 (suc m) n (inl snotz) gmn)
 
 gcd[m,n]≡0⇒n≡0 : ∀ {m n} → gcd m n ≡ 0 → n ≡ 0
-gcd[m,n]≡0⇒n≡0 {m}{n} gmn = gcd[m,n]≡0⇒m≡0 {n}{m}
-  gcd[m,n]≡0⇒m≡0 {n} {m} (gcdSym n m ∙ gmn)
+gcd[m,n]≡0⇒n≡0 {m}{n} gmn = gcd[m,n]≡0⇒m≡0 {n} {m} (gcdSym n m ∙ gmn)
 
 -- Inequality for strict divisibility
 
