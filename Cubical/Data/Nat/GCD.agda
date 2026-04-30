@@ -241,13 +241,7 @@ gcd[m,n]∣n : (m n : ℕ) → (gcd m n) ∣ n
 gcd[m,n]∣n m n = transport (cong (λ a → a ∣ n) (gcdSym n m) ) (gcd[m,n]∣m n m)
 
 gcd-greatest : c ∣ m → c ∣ n → c ∣ gcd m n
-gcd-greatest c∣m c∣n =
-  rec2 isPropPropTrunc (λ x y → ∣ gcd-greatestHlp y x ∣₁) c∣n c∣m
-  where
-    gcd-greatestHlp : ∀ {m}{n}{c} → (x : Σ ℕ (λ c₁ → c₁ · c ≡ m)) →
-      (y : Σ ℕ (λ c₁ → c₁ · c ≡ n)) → Σ ℕ (λ c₁ → c₁ · c ≡ gcd m n)
-    gcd-greatestHlp {m} {n} {c} (m' , m'c≡m) (n' , n'c≡n) =
-      (gcd m' n') , sym (gcd-factorʳ m' n' c) ∙ cong₂ (λ a b → gcd a b) m'c≡m n'c≡n
+gcd-greatest = curry (snd (gcdIsGCD _ _) _)
 
 -- Other properties
 
@@ -267,7 +261,7 @@ gcd[m,n]≡0⇒m≡0 {suc m} {n} gmn =
 
 gcd[m,n]≡0⇒n≡0 : ∀ {m n} → gcd m n ≡ 0 → n ≡ 0
 gcd[m,n]≡0⇒n≡0 {m}{n} gmn = gcd[m,n]≡0⇒m≡0 {n}{m}
-  (transport (cong (λ a → a ≡ 0) (gcdSym m n)) gmn)
+  gcd[m,n]≡0⇒m≡0 {n} {m} (gcdSym n m ∙ gmn)
 
 -- Inequality for strict divisibility
 
