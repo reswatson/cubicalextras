@@ -827,12 +827,6 @@ inj-+z {z} {l} {n} p = inj-z+ {z = z} (+Comm z l ∙ p ∙ +Comm n z)
 n+z≡z→n≡0 : ∀ n z → n + z ≡ z → n ≡ 0
 n+z≡z→n≡0 n z p = inj-z+ {z = z} {l = n} {n = 0} (+Comm z n ∙ p)
 
-
-pos+pos-def : ∀ m {k} → (pos m +pos k) ≡ pos (m +ℕ k)
-pos+pos-def m {zero} = cong pos (sym (+-zero m))
-pos+pos-def m {suc k} =
-  cong sucℤ (pos+pos-def m) ∙ cong pos (sym (+-suc m k))
-
 negsuc+negsuc-def : ∀ m {k} → negsuc m +negsuc k ≡ negsuc (m +ℕ (suc k))
 negsuc+negsuc-def m {zero} = cong negsuc (+ℕ-comm 1 m)
 negsuc+negsuc-def m {suc k} = cong predℤ (negsuc+negsuc-def m {k}) ∙

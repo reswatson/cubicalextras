@@ -24,7 +24,7 @@ open import Cubical.Data.Nat.Mod renaming (
 open import Cubical.Data.Nat.Divisibility
 
 open import Cubical.Data.Int.Base as ℤ using (ℤ ; pos ; negsuc ; abs) renaming (_·_ to _ℤ·_; _+_ to _ℤ+_ ; -_ to -ℤ_)
-open import Cubical.Data.Int.Properties as ℤ using (injPos; injNegsuc; pos·pos; pos0+; -Dist+; -DistL·; negsucNotpos; negsuc·possuc;  pos+;  +CancelRNegsuc; pos+pos-def; negsuc+negsuc-def)
+open import Cubical.Data.Int.Properties as ℤ using (injPos; injNegsuc; pos·pos; pos0+; -Dist+; -DistL·; negsucNotpos; negsuc·possuc;  pos+;  +CancelRNegsuc; negsuc+negsuc-def)
 open import Cubical.Data.Int.Order as ℤ using (zero-<sucPos; ≤-+-<; m≤n→posm≤posn)
 open import Cubical.Data.Int.Divisibility as ℤ using ()
 
@@ -429,7 +429,7 @@ module Bézout where
         step3 = sym (cong₂ (λ a b → b ℤ.+ a) step1 (sym step2)) ∙ eq'
         step4 = +CancelRNegsuc (pos (suc (m + z · suc m)))
                  (n + y · suc n) (pos (gcd (suc m) (suc n))) step3
-        step5 = pos+pos-def (gcd (suc m) (suc n)) {(suc (n + y · suc n))}
+        step5 = sym (pos+ (gcd (suc m) (suc n)) (suc (n + y · suc n)))
         step6 = sym (injPos (step4 ∙ step5))
     identityHlp {n} {m} (negsuc y , pos z , eq') = -+ (suc y) z step6
       where
@@ -438,7 +438,7 @@ module Bézout where
         step3 = (sym (cong₂ (λ a b → a ℤ+ b) (sym (pos·pos z (suc m))) step1)) ∙ step2
         step4 = +CancelRNegsuc (pos (z · suc m))
                 (n + y · suc n) (pos (gcd (suc n) (suc m))) step3
-        step5 = pos+pos-def (gcd (suc n) (suc m)) {(suc (n + y · suc n))}
+        step5 = sym (pos+ (gcd (suc n) (suc m)) (suc (n + y · suc n)))
         step6 = sym (injPos (step4 ∙ step5))
     identityHlp {m} {n} (negsuc z , negsuc y , eq') =
       ⊥.elim {ℓ-zero}  {λ x → Identity (gcd (suc m) (suc n)) (suc m) (suc n)}

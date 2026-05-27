@@ -193,7 +193,7 @@ isAntisym≤ {m} {n} (i , p) (j , q)
    n ℤ.+ o             ∎))
 
 m≤n→posm≤posn : ∀ {m}{n} → (m ℕ≤ n) → pos m ≤ pos n
-m≤n→posm≤posn {m} {n} (k , prf) = k , pos+pos-def m ∙ cong pos (ℕ.+-comm m k ∙ prf)
+m≤n→posm≤posn {m} {n} (k , prf) = k , sym (pos+ m k) ∙ cong pos (ℕ.+-comm m k ∙ prf)
 
 ≤-+pos-trans : m ℤ.+ pos k ≤ n → m ≤ n
 ≤-+pos-trans {m} {k} {n} p = isTrans≤ ≤SumRightPos (subst (_≤ n) (+Comm m (pos k)) p)
@@ -298,8 +298,8 @@ isAsym< m<n = isIrrefl< ∘ <≤-trans m<n
 <Monotone+ : m < n → o < s → m ℤ.+ o < n ℤ.+ s
 <Monotone+ {o = o} m<n o<s = isTrans< (<-+o {o = o} m<n) (<-o+ o<s)
 
-x-<x+posSuc : ∀ {x y} → x < x ℤ.+ pos (suc y)
-x-<x+posSuc {x}{y} = <-o+ {pos zero}{pos (suc y)} zero-<sucPos
+<SumLeftPosSuc : ∀ {x y} → x < x ℤ.+ pos (suc y)
+<SumLeftPosSuc {x}{y} = <-o+ {pos zero}{pos (suc y)} zero-<sucPos
 
 <-+-≤ : m < n → o ≤ s → m ℤ.+ o < n ℤ.+ s
 <-+-≤ {o = o} m<n o≤s = <≤-trans (<-+o {o = o} m<n) (≤-o+ o≤s)
