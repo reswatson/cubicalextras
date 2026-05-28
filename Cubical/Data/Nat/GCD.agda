@@ -459,5 +459,3 @@ module Bézout where
   identity {m}{n}{d} mnd = subst (λ x → x)
     (cong (λ a → Identity a m n) (isGCD→gcd≡ mnd))
     (identity' {m}{n} (lemma-Bézout m n))
-
-open Bézout
