@@ -182,8 +182,7 @@ isAntisym≤ {m} {n} (i , p) (j , q)
 ≤Monotone+ {o = o} p q = isTrans≤ (≤-+o {o = o} p) (≤-o+ q)
 
 weaken≡→≤ : ∀ {m}{n} → m ≡ n → m ≤ n
-weaken≡→≤ {m}{n} mn =
-  subst (λ x → x) (cong (λ x → x ≤ n) (sym mn)) (isRefl≤ {n})
+weaken≡→≤ {m}{n} mn = 0 , mn
 
 ¬≤→≢ : ∀ {m n : ℤ} → ¬ m ≤ n → ¬ m ≡ n
 ¬≤→≢ {m}{n} ¬mn = λ x → ¬mn (weaken≡→≤ x)
@@ -291,8 +290,7 @@ isAsym< : m < n → ¬ n ≤ m
 isAsym< m<n = isIrrefl< ∘ <≤-trans m<n
 
 <→≢ : ∀ {m n : ℤ} → m < n → ¬ m ≡ n
-<→≢ {m}{n} m<n m≡n =
-  ⊥.elim (isAsym< {m}{n} m<n (subst (λ u → u ≤ m) m≡n (isRefl≤ {m})))
+<→≢ {m}{n} m<n m≡n = isAsym< m<n (0 , sym m≡n)
 
 <-+o : m < n → m ℤ.+ o < n ℤ.+ o
 <-+o {m} {n} {o} = subst (_≤ n ℤ.+ o) (sym (sucℤ+ m o)) ∘ ≤-+o {o = o}

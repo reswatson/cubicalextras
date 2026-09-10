@@ -7,7 +7,6 @@ open import Cubical.Data.Nat using (suc; predℕ; ≢0→NonZero; snotz)
 open import Cubical.Data.Nat.Divisibility renaming (_∣_ to _∣ℕ_)
 open import Cubical.Data.NatPlusOne using (1+_)
 open import Cubical.Data.NatPlusOne.PropertiesWithInt
-  using (ℕ₊₁→ℤ; ℕ₊₁→ℤ-1+pred-def)
 open import Cubical.Foundations.Prelude
 open import Cubical.Data.Int.Divisibility
 open import Cubical.Data.Int
